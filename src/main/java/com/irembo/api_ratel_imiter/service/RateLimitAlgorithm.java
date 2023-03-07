@@ -1,4 +1,4 @@
-package com.irembo.api_ratel_imiter.service.algorithm;
+package com.irembo.api_ratel_imiter.service;
 
 /**
  * @author Ahmed Ali Rashid

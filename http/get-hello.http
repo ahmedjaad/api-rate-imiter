@@ -3,11 +3,13 @@ Host: localhost:8080
 
 ###
 
-# curl -X POST http://localhost:9001/api/v1/area/rectangle
+# curl -X POST http://localhost:8080/api/v1/area/rectangle
 #    -H "Content-Type: application/json"
+#    -H "X-tenant-id: google"
 #    -d '{ "length": 10, "width": 12 }'
 POST http://localhost:8080/api/v1/area/rectangle
 Content-Type: application/json
+X-tenant-id: google
 
 {
   "length": 10.1,

@@ -1,6 +1,6 @@
 package com.irembo.api_ratel_imiter.controller;
 
-import com.irembo.api_ratel_imiter.service.algorithm.RateLimitAlgorithm;
+import com.irembo.api_ratel_imiter.service.RateLimitAlgorithm;
 import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
