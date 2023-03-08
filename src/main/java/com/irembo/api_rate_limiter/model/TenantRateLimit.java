@@ -1,4 +1,4 @@
-package com.irembo.api_ratel_imiter.model;
+package com.irembo.api_rate_limiter.model;
 
 
 import lombok.Builder;

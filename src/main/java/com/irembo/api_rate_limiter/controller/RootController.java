@@ -1,6 +1,6 @@
-package com.irembo.api_ratel_imiter.controller;
+package com.irembo.api_rate_limiter.controller;
 
-import com.irembo.api_ratel_imiter.service.RateLimitAlgorithm;
+import com.irembo.api_rate_limiter.service.RateLimitAlgorithm;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

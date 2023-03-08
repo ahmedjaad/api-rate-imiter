@@ -1,4 +1,4 @@
-package com.irembo.api_ratel_imiter.dto;
+package com.irembo.api_rate_limiter.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

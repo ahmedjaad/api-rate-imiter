@@ -1,7 +1,7 @@
-package com.irembo.api_ratel_imiter.configuration;
+package com.irembo.api_rate_limiter.configuration;
 
-import com.irembo.api_ratel_imiter.service.RateLimitAlgorithm;
-import com.irembo.api_ratel_imiter.service.impl.TokenBucket;
+import com.irembo.api_rate_limiter.service.RateLimitAlgorithm;
+import com.irembo.api_rate_limiter.service.impl.TokenBucket;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
 import io.github.bucket4j.Refill;

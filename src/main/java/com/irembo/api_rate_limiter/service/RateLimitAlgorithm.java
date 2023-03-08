@@ -1,4 +1,4 @@
-package com.irembo.api_ratel_imiter.service;
+package com.irembo.api_rate_limiter.service;
 
 /**
  * @author Ahmed Ali Rashid

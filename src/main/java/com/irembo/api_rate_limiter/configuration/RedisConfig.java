@@ -1,4 +1,4 @@
-package com.irembo.api_ratel_imiter.configuration;
+package com.irembo.api_rate_limiter.configuration;
 
 import io.github.bucket4j.distributed.proxy.ProxyManager;
 import io.github.bucket4j.grid.jcache.JCacheProxyManager;

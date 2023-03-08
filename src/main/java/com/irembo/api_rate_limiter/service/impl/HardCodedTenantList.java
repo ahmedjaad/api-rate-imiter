@@ -1,8 +1,8 @@
-package com.irembo.api_ratel_imiter.service.impl;
+package com.irembo.api_rate_limiter.service.impl;
 
-import com.irembo.api_ratel_imiter.model.MonthlyRateLimit;
-import com.irembo.api_ratel_imiter.model.RateLimit;
-import com.irembo.api_ratel_imiter.model.TenantRateLimit;
+import com.irembo.api_rate_limiter.model.MonthlyRateLimit;
+import com.irembo.api_rate_limiter.model.RateLimit;
+import com.irembo.api_rate_limiter.model.TenantRateLimit;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;

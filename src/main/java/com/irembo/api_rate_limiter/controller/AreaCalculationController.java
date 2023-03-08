@@ -1,9 +1,9 @@
-package com.irembo.api_ratel_imiter.controller;
+package com.irembo.api_rate_limiter.controller;
 
-import com.irembo.api_ratel_imiter.dto.RectangleDimensionsDto;
-import com.irembo.api_ratel_imiter.model.TenantRateLimit;
-import com.irembo.api_ratel_imiter.resource.AreaResource;
-import com.irembo.api_ratel_imiter.service.TenantBucketProvider;
+import com.irembo.api_rate_limiter.dto.RectangleDimensionsDto;
+import com.irembo.api_rate_limiter.model.TenantRateLimit;
+import com.irembo.api_rate_limiter.resource.AreaResource;
+import com.irembo.api_rate_limiter.service.TenantBucketProvider;
 import io.github.bucket4j.Bucket;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;

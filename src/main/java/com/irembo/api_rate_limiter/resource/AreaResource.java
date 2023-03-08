@@ -1,4 +1,4 @@
-package com.irembo.api_ratel_imiter.resource;
+package com.irembo.api_rate_limiter.resource;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

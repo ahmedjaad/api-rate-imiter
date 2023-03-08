@@ -1,7 +1,7 @@
-package com.irembo.api_ratel_imiter.service.impl;
+package com.irembo.api_rate_limiter.service.impl;
 
-import com.irembo.api_ratel_imiter.model.TenantRateLimit;
-import com.irembo.api_ratel_imiter.service.TenantBucketProvider;
+import com.irembo.api_rate_limiter.model.TenantRateLimit;
+import com.irembo.api_rate_limiter.service.TenantBucketProvider;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
 import io.github.bucket4j.Refill;
@@ -13,9 +13,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.irembo.api_ratel_imiter.service.BucketProviderUtil.addMonthlyRateLimit;
-import static com.irembo.api_ratel_imiter.service.BucketProviderUtil.addTimeWindowRateLimit;
-import static com.irembo.api_ratel_imiter.service.impl.HardCodedTenantList.tenantRateLimits;
+import static com.irembo.api_rate_limiter.service.BucketProviderUtil.addMonthlyRateLimit;
+import static com.irembo.api_rate_limiter.service.BucketProviderUtil.addTimeWindowRateLimit;
+import static com.irembo.api_rate_limiter.service.impl.HardCodedTenantList.tenantRateLimits;
 
 @Service
 public class StandAloneTenantBucketProvider implements TenantBucketProvider {

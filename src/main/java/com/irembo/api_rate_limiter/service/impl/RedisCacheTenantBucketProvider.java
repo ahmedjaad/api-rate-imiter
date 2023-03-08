@@ -1,7 +1,7 @@
-package com.irembo.api_ratel_imiter.service.impl;
+package com.irembo.api_rate_limiter.service.impl;
 
-import com.irembo.api_ratel_imiter.model.TenantRateLimit;
-import com.irembo.api_ratel_imiter.service.TenantBucketProvider;
+import com.irembo.api_rate_limiter.model.TenantRateLimit;
+import com.irembo.api_rate_limiter.service.TenantBucketProvider;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
 import io.github.bucket4j.BucketConfiguration;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.function.Supplier;
 
-import static com.irembo.api_ratel_imiter.service.impl.HardCodedTenantList.tenantRateLimits;
+import static com.irembo.api_rate_limiter.service.impl.HardCodedTenantList.tenantRateLimits;
 
 @Service
 public class RedisCacheTenantBucketProvider implements TenantBucketProvider {
@@ -25,7 +25,6 @@ public class RedisCacheTenantBucketProvider implements TenantBucketProvider {
     public Bucket getBucketByTenant(TenantRateLimit tenantRateLimit) {
         Supplier<BucketConfiguration> configSupplier = getConfigSupplierForUser(tenantRateLimit.getTenantId());
 
-        // Does not always create a new bucket, but instead returns the existing one if it exists.
         return bucketsProxyManager.builder().build(tenantRateLimit.getTenantId(), configSupplier);
     }
 

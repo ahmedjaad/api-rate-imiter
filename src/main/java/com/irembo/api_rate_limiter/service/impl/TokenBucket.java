@@ -1,6 +1,6 @@
-package com.irembo.api_ratel_imiter.service.impl;
+package com.irembo.api_rate_limiter.service.impl;
 
-import com.irembo.api_ratel_imiter.service.RateLimitAlgorithm;
+import com.irembo.api_rate_limiter.service.RateLimitAlgorithm;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;

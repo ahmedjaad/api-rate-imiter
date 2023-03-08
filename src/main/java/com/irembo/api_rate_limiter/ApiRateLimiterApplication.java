@@ -1,4 +1,4 @@
-package com.irembo.api_ratel_imiter;
+package com.irembo.api_rate_limiter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
