@@ -1,0 +1,17 @@
+GET /hello?tokens=1001 HTTP/1.1
+Host: localhost:8082
+
+###
+# @name google
+GET http://localhost:8082/api/v1/hello
+X-tenant-id: google
+###
+# @name irembo
+GET http://localhost:8082/api/v1/hello
+X-tenant-id: irembo
+###
+# @name meta
+GET http://localhost:8082/api/v1/hello
+X-tenant-id: meta
+###
+
