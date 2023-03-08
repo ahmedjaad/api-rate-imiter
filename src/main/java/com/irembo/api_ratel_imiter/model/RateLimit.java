@@ -1,18 +1,15 @@
 package com.irembo.api_ratel_imiter.model;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.Duration;
 
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
-@RequiredArgsConstructor(staticName = "of")
+@AllArgsConstructor(staticName = "of")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class RateLimit {
-    private  final long capacity;
-    private  final long refillTokens;
-    private final Duration period;
+    private  long capacity;
+    private  long refillTokens;
+    private Duration period;
 
 }
