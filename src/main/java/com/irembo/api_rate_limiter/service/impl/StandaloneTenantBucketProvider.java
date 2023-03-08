@@ -1,32 +1,25 @@
 package com.irembo.api_rate_limiter.service.impl;
 
 import com.irembo.api_rate_limiter.model.TenantRateLimit;
+import com.irembo.api_rate_limiter.service.BucketProviderUtil;
 import com.irembo.api_rate_limiter.service.TenantBucketProvider;
 import com.irembo.api_rate_limiter.util.Profiles;
-import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
-import io.github.bucket4j.Refill;
 import io.github.bucket4j.local.LocalBucketBuilder;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static com.irembo.api_rate_limiter.service.BucketProviderUtil.addMonthlyRateLimit;
-import static com.irembo.api_rate_limiter.service.BucketProviderUtil.addTimeWindowRateLimit;
-import static com.irembo.api_rate_limiter.service.impl.HardCodedTenantList.tenantRateLimits;
 
 @Service
 @Profile(Profiles.STANDALONE)
 public class StandaloneTenantBucketProvider implements TenantBucketProvider {
     private static final Map<String, Bucket> cache = new ConcurrentHashMap<>();
-    public static final Bandwidth apiServiceWideLimit = Bandwidth.classic(5, Refill.intervally(5, Duration.of(15, ChronoUnit.SECONDS)));
 
     static {
-        tenantRateLimits.forEach(tenantRateLimit -> cache.put(tenantRateLimit.getTenantId(), newBucket(tenantRateLimit)));
+        HardCodedTenantList.tenantRateLimits.forEach(tenantRateLimit -> cache.put(tenantRateLimit.getTenantId(), newBucket(tenantRateLimit)));
     }
 
     @Override
@@ -36,9 +29,13 @@ public class StandaloneTenantBucketProvider implements TenantBucketProvider {
 
     private static Bucket newBucket(TenantRateLimit tenantRateLimit) {
         LocalBucketBuilder tenantCumulativeBucket = Bucket.builder()
-                .addLimit(apiServiceWideLimit);
-        addMonthlyRateLimit(tenantCumulativeBucket, tenantRateLimit);
-        addTimeWindowRateLimit(tenantCumulativeBucket, tenantRateLimit);
+                .addLimit(HardCodedTenantList.apiServiceWideLimit);
+        if (Objects.nonNull(tenantRateLimit.getMonthlyRateLimit())) {
+            tenantCumulativeBucket.addLimit(BucketProviderUtil.getMonthlyRateLimit(tenantRateLimit));
+        }
+        if (Objects.nonNull(tenantRateLimit.getTimeWindowRateLimit())) {
+            tenantCumulativeBucket.addLimit(BucketProviderUtil.getTimeWindowRateLimit(tenantRateLimit));
+        }
         return tenantCumulativeBucket
                 .build();
     }

@@ -3,6 +3,8 @@ package com.irembo.api_rate_limiter.service.impl;
 import com.irembo.api_rate_limiter.model.MonthlyRateLimit;
 import com.irembo.api_rate_limiter.model.RateLimit;
 import com.irembo.api_rate_limiter.model.TenantRateLimit;
+import io.github.bucket4j.Bandwidth;
+import io.github.bucket4j.Refill;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -10,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class HardCodedTenantList {
+    public static final Bandwidth apiServiceWideLimit = Bandwidth.classic(5, Refill.intervally(5, Duration.of(15, ChronoUnit.SECONDS)));
     protected static final List<TenantRateLimit> tenantRateLimits = Arrays.asList(
             TenantRateLimit.builder()
                     .tenantId("irembo")
