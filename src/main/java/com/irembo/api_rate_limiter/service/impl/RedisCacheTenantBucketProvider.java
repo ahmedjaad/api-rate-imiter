@@ -2,11 +2,13 @@ package com.irembo.api_rate_limiter.service.impl;
 
 import com.irembo.api_rate_limiter.model.TenantRateLimit;
 import com.irembo.api_rate_limiter.service.TenantBucketProvider;
+import com.irembo.api_rate_limiter.util.Profiles;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
 import io.github.bucket4j.BucketConfiguration;
 import io.github.bucket4j.Refill;
 import io.github.bucket4j.distributed.proxy.ProxyManager;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Supplier;
@@ -14,6 +16,7 @@ import java.util.function.Supplier;
 import static com.irembo.api_rate_limiter.service.impl.HardCodedTenantList.tenantRateLimits;
 
 @Service
+@Profile(Profiles.DISTRIBUTED)
 public class RedisCacheTenantBucketProvider implements TenantBucketProvider {
     private final ProxyManager<String> bucketsProxyManager;
 

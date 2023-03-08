@@ -5,7 +5,6 @@ import com.irembo.api_rate_limiter.model.TenantRateLimit;
 import com.irembo.api_rate_limiter.resource.AreaResource;
 import com.irembo.api_rate_limiter.service.TenantBucketProvider;
 import io.github.bucket4j.Bucket;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 class AreaCalculationController {
     private final TenantBucketProvider tenantBucketProvider;
 
-    public AreaCalculationController(@Qualifier("redisCacheTenantBucketProvider") TenantBucketProvider tenantBucketProvider) {
+    public AreaCalculationController(TenantBucketProvider tenantBucketProvider) {
         this.tenantBucketProvider = tenantBucketProvider;
     }
 

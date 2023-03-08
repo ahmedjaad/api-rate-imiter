@@ -2,10 +2,12 @@ package com.irembo.api_rate_limiter.service.impl;
 
 import com.irembo.api_rate_limiter.model.TenantRateLimit;
 import com.irembo.api_rate_limiter.service.TenantBucketProvider;
+import com.irembo.api_rate_limiter.util.Profiles;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
 import io.github.bucket4j.Refill;
 import io.github.bucket4j.local.LocalBucketBuilder;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -18,7 +20,8 @@ import static com.irembo.api_rate_limiter.service.BucketProviderUtil.addTimeWind
 import static com.irembo.api_rate_limiter.service.impl.HardCodedTenantList.tenantRateLimits;
 
 @Service
-public class StandAloneTenantBucketProvider implements TenantBucketProvider {
+@Profile(Profiles.STANDALONE)
+public class StandaloneTenantBucketProvider implements TenantBucketProvider {
     private static final Map<String, Bucket> cache = new ConcurrentHashMap<>();
     public static final Bandwidth apiServiceWideLimit = Bandwidth.classic(5, Refill.intervally(5, Duration.of(15, ChronoUnit.SECONDS)));
 

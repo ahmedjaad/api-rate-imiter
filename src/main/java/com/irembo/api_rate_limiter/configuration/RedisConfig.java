@@ -1,5 +1,6 @@
 package com.irembo.api_rate_limiter.configuration;
 
+import com.irembo.api_rate_limiter.util.Profiles;
 import io.github.bucket4j.distributed.proxy.ProxyManager;
 import io.github.bucket4j.grid.jcache.JCacheProxyManager;
 import org.redisson.config.Config;
@@ -7,11 +8,13 @@ import org.redisson.jcache.configuration.RedissonConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import javax.cache.CacheManager;
 import javax.cache.Caching;
 
 @Configuration
+@Profile(Profiles.DISTRIBUTED)
 public class RedisConfig  {
 
     @Value(value = "${custom.cacheManager.redis.connection.url}")
