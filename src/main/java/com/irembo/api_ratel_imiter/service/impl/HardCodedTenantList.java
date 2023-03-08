@@ -13,21 +13,21 @@ public class HardCodedTenantList {
     protected static final List<TenantRateLimit> tenantRateLimits = Arrays.asList(
             TenantRateLimit.builder()
                     .tenantId("irembo")
-                    .timeWindoRateLimit(
+                    .timeWindowRateLimit(
                             RateLimit.of(1, 1, Duration.of(1, ChronoUnit.MILLIS))
                     )
                     .monthlyRateLimit(MonthlyRateLimit.of(100, 100))
                     .build(),
             TenantRateLimit.builder()
                     .tenantId("google")
-                    .timeWindoRateLimit(
+                    .timeWindowRateLimit(
                             RateLimit.of(1, 1, Duration.of(2, ChronoUnit.SECONDS))
                     )
                     .monthlyRateLimit(MonthlyRateLimit.of(100, 100))
                     .build(),
             TenantRateLimit.builder()
                     .tenantId("meta")
-                    .timeWindoRateLimit(
+                    .timeWindowRateLimit(
                             RateLimit.of(1, 1, Duration.of(1, ChronoUnit.MINUTES))
                     )
                     .monthlyRateLimit(MonthlyRateLimit.of(100, 100))
