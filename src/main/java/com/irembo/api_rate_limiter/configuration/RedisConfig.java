@@ -4,6 +4,7 @@ import io.github.bucket4j.distributed.proxy.ProxyManager;
 import io.github.bucket4j.grid.jcache.JCacheProxyManager;
 import org.redisson.config.Config;
 import org.redisson.jcache.configuration.RedissonConfiguration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,22 +14,26 @@ import javax.cache.Caching;
 @Configuration
 public class RedisConfig  {
 
+    @Value(value = "${custom.cacheManager.redis.connection.url}")
+    public String redisConnectionUrl;
+    @Value(value = "${custom.cacheManager.redis.cache.key}")
+    public String redisCacheKey;
     @Bean
     public Config config() {
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://localhost:6379");
+        config.useSingleServer().setAddress(redisConnectionUrl);
         return config;
     }
 
     @Bean(name="customCacheManager")
     public CacheManager cacheManager(Config config) {
         CacheManager cacheManager = Caching.getCachingProvider().getCacheManager();
-        cacheManager.createCache("cache", RedissonConfiguration.fromConfig(config));
+        cacheManager.createCache(redisCacheKey, RedissonConfiguration.fromConfig(config));
         return cacheManager;
     }
 
     @Bean
     ProxyManager<String> proxyManager(CacheManager cacheManager) {
-        return new JCacheProxyManager<>(cacheManager.getCache("cache"));
+        return new JCacheProxyManager<>(cacheManager.getCache(redisCacheKey));
     }
 }
