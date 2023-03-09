@@ -3,6 +3,7 @@ package com.irembo.api_rate_limiter.controller;
 import com.irembo.api_rate_limiter.model.TenantRateLimit;
 import com.irembo.api_rate_limiter.service.ApiServerSender;
 import com.irembo.api_rate_limiter.service.TenantBucketProvider;
+import com.irembo.api_rate_limiter.validator.ValidTenantId;
 import io.github.bucket4j.Bucket;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 @RestController
+//@Validated
 @RequestMapping("/api/v1/**")
 class RateLimiterController {
     private final TenantBucketProvider tenantBucketProvider;
@@ -23,10 +25,9 @@ class RateLimiterController {
         this.tenantBucketProvider = tenantBucketProvider;
         this.apiServerSender = apiServerSender;
     }
-
     @GetMapping
     public ResponseEntity<Object> getHandler(
-            @RequestHeader(value = "X-tenant-id") String tenantId
+            @ValidTenantId @RequestHeader(value = "X-tenant-id") String tenantId
     ) {
         Bucket tenantBucket = tenantBucketProvider.getBucketByTenant(TenantRateLimit.builder().tenantId(tenantId).build());
         if (tenantBucket.tryConsume(1)) {
