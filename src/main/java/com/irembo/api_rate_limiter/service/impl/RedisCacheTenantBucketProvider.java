@@ -12,6 +12,12 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 import java.util.function.Supplier;
 
+/**
+ * This Implementation for rate limits rules/quotas that are in a distributed environment and use Redis as the
+ * distributed cache provider
+ * @author Ahmed Ali Rashid
+ */
+
 @Service
 @Profile(Profiles.DISTRIBUTED)
 public class RedisCacheTenantBucketProvider implements TenantBucketProvider {
@@ -29,13 +35,13 @@ public class RedisCacheTenantBucketProvider implements TenantBucketProvider {
     }
 
     private Supplier<BucketConfiguration> getConfigSupplierForUser(String tenantId) {
-        TenantRateLimit tenantRateLimit = HardCodedTenantList.tenantRateLimits.stream()
+        TenantRateLimit tenantRateLimit = HardCodedTenantRules.tenantRateLimits.stream()
                 .filter(foundTenantRateLimit -> foundTenantRateLimit.getTenantId().equals(tenantId))
                 .toList()
                 .get(0);
 
         ConfigurationBuilder configurationBuilder = BucketConfiguration.builder();
-        configurationBuilder.addLimit(HardCodedTenantList.apiServiceWideLimit);
+        configurationBuilder.addLimit(HardCodedTenantRules.apiServiceWideLimit);
         if (Objects.nonNull(tenantRateLimit.getMonthlyRateLimit())) {
             configurationBuilder.addLimit(BucketProviderUtil.getMonthlyRateLimit(tenantRateLimit));
         }

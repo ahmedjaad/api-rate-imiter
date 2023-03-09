@@ -1,7 +1,7 @@
 package com.irembo.api_rate_limiter.controller;
 
 import com.irembo.api_rate_limiter.model.TenantRateLimit;
-import com.irembo.api_rate_limiter.service.ApiService;
+import com.irembo.api_rate_limiter.service.ApiServerSender;
 import com.irembo.api_rate_limiter.service.TenantBucketProvider;
 import io.github.bucket4j.Bucket;
 import org.springframework.http.HttpStatus;
@@ -17,11 +17,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @RequestMapping("/api/v1/**")
 class RateLimiterController {
     private final TenantBucketProvider tenantBucketProvider;
-    private final ApiService apiService;
+    private final ApiServerSender apiServerSender;
 
-    public RateLimiterController(TenantBucketProvider tenantBucketProvider, ApiService apiService) {
+    public RateLimiterController(TenantBucketProvider tenantBucketProvider, ApiServerSender apiServerSender) {
         this.tenantBucketProvider = tenantBucketProvider;
-        this.apiService = apiService;
+        this.apiServerSender = apiServerSender;
     }
 
     @GetMapping
@@ -31,10 +31,10 @@ class RateLimiterController {
         Bucket tenantBucket = tenantBucketProvider.getBucketByTenant(TenantRateLimit.builder().tenantId(tenantId).build());
         if (tenantBucket.tryConsume(1)) {
             String endpoint = this.getEndpoint();
-            Object apiServiceResponse = apiService.getFromApi(endpoint);
+            Object apiServiceResponse = apiServerSender.send(endpoint, "GET");
             return ResponseEntity.ok(apiServiceResponse);
         }
-        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build();
+        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body("Too many requests");
     }
 
     private String getEndpoint() {
