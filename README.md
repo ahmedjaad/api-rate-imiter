@@ -58,3 +58,18 @@ To send an HTTP request and test user the following `curl` command
 
 PORT value will be `8082` for the `standalone` profile and `8081` for the `distributed` one, the tenant id can also be
 changed to either `meta` or  `google`
+
+## Valid Tenant and their limits
+we have a system-wide limit that is applicable to all tenant, bellow table gives details
+
+| Number of requests allowed | Time span |
+|----------------------------|-----------|
+| 5                          | 15 sec    |
+
+Below table for valid tenants and their limits
+
+| Tenant Id | Monthly limit | Duration for time<br/> window | Allowed requests for<br/> time window limit |
+|-----------|---------------|-------------------------------|---------------------------------------------|
+| _irembo_  | 100           | 1 millisecond                 | 1                                           |
+| _google_  | 100           | 2 seconds                     | 1                                           |
+| _meta_    | 100           | 1 minute                      | 1                                           |
