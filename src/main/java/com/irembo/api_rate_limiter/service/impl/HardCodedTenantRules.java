@@ -15,6 +15,7 @@ import java.util.List;
  * For the sake of brevity we're hardcoding allowed limits for each tenant, but in a real-world scenario these values would come from an engine rule service or cache
  */
 public class HardCodedTenantRules {
+    public static final String API_SERVICE_WIDE_BUCKET_KEY = "system_wide_limit";
     /**
      * This is the rule that is applicable to the whole system, and every tenant must conform with it in the real world scenario these would be obtained from
      *   a rule engine ( a separate service or a cache )
