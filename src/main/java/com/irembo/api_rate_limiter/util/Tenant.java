@@ -10,6 +10,7 @@ public enum Tenant {
     GOOGLE("google"),
     ;
     private final String tenantId;
+
     public String getTenantId() {
         return tenantId;
     }
@@ -17,17 +18,19 @@ public enum Tenant {
     Tenant(String tenantId) {
         this.tenantId = tenantId;
     }
+
     @Override
     public String toString() {
         return tenantId;
     }
-    public static boolean contains ( String name) {
+
+    public static boolean contains(String tenantId) {
         AtomicBoolean validTenant = new AtomicBoolean(false);
-        List<Tenant> tenants =Arrays.asList(Tenant.values());
+        List<Tenant> tenants = Arrays.asList(Tenant.values());
         tenants.stream()
                 .map(Tenant::getTenantId)
-                .forEach(tenantName -> {
-                     if (tenantName.equals(name)) validTenant.set(true);
+                .forEach(foundTenantId -> {
+                    if (foundTenantId.equals(tenantId)) validTenant.set(true);
                 });
         return validTenant.get();
     }
