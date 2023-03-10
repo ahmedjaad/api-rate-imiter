@@ -3,6 +3,7 @@ package com.irembo.api_rate_limiter.service.impl;
 import com.irembo.api_rate_limiter.model.MonthlyRateLimit;
 import com.irembo.api_rate_limiter.model.RateLimit;
 import com.irembo.api_rate_limiter.model.TenantRateLimit;
+import com.irembo.api_rate_limiter.util.Tenant;
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Refill;
 
@@ -27,21 +28,21 @@ public class HardCodedTenantRules {
      */
     protected static final List<TenantRateLimit> tenantRateLimits = Arrays.asList(
             TenantRateLimit.builder()
-                    .tenantId("irembo")
+                    .tenantId(Tenant.IREMBO.getTenantId())
                     .timeWindowRateLimit(
                             RateLimit.of(1, 1, Duration.of(1, ChronoUnit.MILLIS))
                     )
                     .monthlyRateLimit(MonthlyRateLimit.of(100, 100))
                     .build(),
             TenantRateLimit.builder()
-                    .tenantId("google")
+                    .tenantId(Tenant.GOOGLE.getTenantId())
                     .timeWindowRateLimit(
                             RateLimit.of(1, 1, Duration.of(2, ChronoUnit.SECONDS))
                     )
                     .monthlyRateLimit(MonthlyRateLimit.of(100, 100))
                     .build(),
             TenantRateLimit.builder()
-                    .tenantId("meta")
+                    .tenantId(Tenant.META.getTenantId())
                     .timeWindowRateLimit(
                             RateLimit.of(1, 1, Duration.of(1, ChronoUnit.MINUTES))
                     )

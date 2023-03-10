@@ -1,10 +1,9 @@
 package com.irembo.api_rate_limiter.validator;
 
 
+import com.irembo.api_rate_limiter.util.Tenant;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
-import java.util.Arrays;
 
 public class TenantIdValidator implements ConstraintValidator<ValidTenantId, String> {
     @Override
@@ -13,6 +12,6 @@ public class TenantIdValidator implements ConstraintValidator<ValidTenantId, Str
     }
 
     private boolean validateTenantId(final String tenantId) {
-        return Arrays.asList("irembo", "google", "meta").contains(tenantId);
+        return Tenant.contains(tenantId);
     }
 }
