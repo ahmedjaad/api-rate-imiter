@@ -18,7 +18,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiError handleGeneralException(Exception e) {
-        return new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Some thing happened on our side %s".formatted(e.getMessage()));
+        return new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Some thing happened on our side " +
+                "" +
+                e.getMessage());
     }
 
 }
